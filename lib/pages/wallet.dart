@@ -3,7 +3,7 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:food_delivery_app/widget/widget_support.dart';
 
-import 'package:flutter_stripe/flutter_stripe.dart';
+// import 'package:flutter_stripe/flutter_stripe.dart';
 import 'package:food_delivery_app/service/database.dart';
 import 'package:food_delivery_app/service/shared_pref.dart';
 import 'package:food_delivery_app/widget/app_constant.dart';
@@ -115,7 +115,7 @@ class _WalletState extends State<Wallet> {
                     children: [
                       GestureDetector(
                         onTap: () {
-                          makePayment('100');
+                          // makePayment('100');
                         },
                         child: Container(
                           padding: EdgeInsets.all(5),
@@ -130,7 +130,7 @@ class _WalletState extends State<Wallet> {
                       ),
                       GestureDetector(
                         onTap: () {
-                          makePayment('500');
+                          // makePayment('500');
                         },
                         child: Container(
                           padding: EdgeInsets.all(5),
@@ -145,7 +145,7 @@ class _WalletState extends State<Wallet> {
                       ),
                       GestureDetector(
                         onTap: () {
-                          makePayment('1000');
+                          // makePayment('1000');
                         },
                         child: Container(
                           padding: EdgeInsets.all(5),
@@ -160,7 +160,7 @@ class _WalletState extends State<Wallet> {
                       ),
                       GestureDetector(
                         onTap: () {
-                          makePayment('2000');
+                          // makePayment('2000');
                         },
                         child: Container(
                           padding: EdgeInsets.all(5),
@@ -207,70 +207,70 @@ class _WalletState extends State<Wallet> {
     );
   }
 
-  Future<void> makePayment(String amount) async {
-    try {
-      paymentIntent = await createPaymentIntent(amount, 'INR');
-      //Payment Sheet
-      await Stripe.instance
-          .initPaymentSheet(
-              paymentSheetParameters: SetupPaymentSheetParameters(
-                  paymentIntentClientSecret: paymentIntent!['client_secret'],
-                  // applePay: const PaymentSheetApplePay(merchantCountryCode: '+92',),
-                  // googlePay: const PaymentSheetGooglePay(testEnv: true, currencyCode: "US", merchantCountryCode: "+92"),
-                  style: ThemeMode.dark,
-                  merchantDisplayName: 'Adnan'))
-          .then((value) {});
+  // Future<void> // makePayment(String amount) async {
+  //   try {
+  //     paymentIntent = await createPaymentIntent(amount, 'INR');
+  //     //Payment Sheet
+  //     await Stripe.instance
+  //         .initPaymentSheet(
+  //             paymentSheetParameters: SetupPaymentSheetParameters(
+  //                 paymentIntentClientSecret: paymentIntent!['client_secret'],
+  //                 // applePay: const PaymentSheetApplePay(merchantCountryCode: '+92',),
+  //                 // googlePay: const PaymentSheetGooglePay(testEnv: true, currencyCode: "US", merchantCountryCode: "+92"),
+  //                 style: ThemeMode.dark,
+  //                 merchantDisplayName: 'Adnan'))
+  //         .then((value) {});
 
-      ///now finally display payment sheeet
-      displayPaymentSheet(amount);
-    } catch (e, s) {
-      print('exception:$e$s');
-    }
-  }
+  //     ///now finally display payment sheeet
+  //     displayPaymentSheet(amount);
+  //   } catch (e, s) {
+  //     print('exception:$e$s');
+  //   }
+  // }
 
-  displayPaymentSheet(String amount) async {
-    try {
-      await Stripe.instance.presentPaymentSheet().then((value) async {
-        add = int.parse(wallet!) + int.parse(amount);
-        await SharedPreferenceHelper().saveUserWallet(add.toString());
-        await DatabaseMethods().UpdateUserWallet(id!, add.toString());
-        // ignore: use_build_context_synchronously
-        showDialog(
-            context: context,
-            builder: (_) => AlertDialog(
-                  content: Column(
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      Row(
-                        children: const [
-                          Icon(
-                            Icons.check_circle,
-                            color: Colors.green,
-                          ),
-                          Text("Payment Successfull"),
-                        ],
-                      ),
-                    ],
-                  ),
-                ));
-        await getthesharedpref();
-        // ignore: use_build_context_synchronously
+  // displayPaymentSheet(String amount) async {
+  //   try {
+  //     await Stripe.instance.presentPaymentSheet().then((value) async {
+  //       add = int.parse(wallet!) + int.parse(amount);
+  //       await SharedPreferenceHelper().saveUserWallet(add.toString());
+  //       await DatabaseMethods().UpdateUserWallet(id!, add.toString());
+  //       // ignore: use_build_context_synchronously
+  //       showDialog(
+  //           context: context,
+  //           builder: (_) => AlertDialog(
+  //                 content: Column(
+  //                   mainAxisSize: MainAxisSize.min,
+  //                   children: [
+  //                     Row(
+  //                       children: const [
+  //                         Icon(
+  //                           Icons.check_circle,
+  //                           color: Colors.green,
+  //                         ),
+  //                         Text("Payment Successfull"),
+  //                       ],
+  //                     ),
+  //                   ],
+  //                 ),
+  //               ));
+  //       await getthesharedpref();
+  //       // ignore: use_build_context_synchronously
 
-        paymentIntent = null;
-      }).onError((error, stackTrace) {
-        print('Error is:--->$error $stackTrace');
-      });
-    } on StripeException catch (e) {
-      print('Error is:---> $e');
-      showDialog(
-          context: context,
-          builder: (_) => const AlertDialog(
-                content: Text("Cancelled "),
-              ));
-    } catch (e) {
-      print('$e');
-    }
-  }
+  //       paymentIntent = null;
+  //     }).onError((error, stackTrace) {
+  //       print('Error is:--->$error $stackTrace');
+  //     });
+  //   } on StripeException catch (e) {
+  //     print('Error is:---> $e');
+  //     showDialog(
+  //         context: context,
+  //         builder: (_) => const AlertDialog(
+  //               content: Text("Cancelled "),
+  //             ));
+  //   } catch (e) {
+  //     print('$e');
+  //   }
+  // }
 
   //  Future<Map<String, dynamic>>
   createPaymentIntent(String amount, String currency) async {
@@ -358,7 +358,7 @@ class _WalletState extends State<Wallet> {
                       child: GestureDetector(
                         onTap: () {
                           Navigator.pop(context);
-                          makePayment(amountcontroller.text);
+                          // makePayment(amountcontroller.text);
                         },
                         child: Container(
                           width: 100,
