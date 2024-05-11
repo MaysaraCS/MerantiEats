@@ -1,7 +1,7 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-// import 'package:flutter_stripe/flutter_stripe.dart';
+import 'package:flutter_stripe/flutter_stripe.dart';
 import 'package:food_delivery_app/admin/admin_login.dart';
 import 'package:food_delivery_app/admin/home_admin.dart';
 import 'package:food_delivery_app/pages/BottomNav.dart';
@@ -11,10 +11,13 @@ import 'package:food_delivery_app/pages/wallet.dart';
 import 'package:food_delivery_app/widget/app_constant.dart';
 import 'package:food_delivery_app/pages/signup.dart';
 import 'firebase_options.dart';
+import 'package:http/http.dart' as http;
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
+  Stripe.publishableKey =
+      "pk_test_51P9yW1GOPvn0rH0uIdmlzsT7d1quekUMCYs6qquL9FWzEwmpGCD8VGMevJwAMwUxMQQoaf2nT2MKTAD19dhzeD6q00vYILDWKC";
   // Stripe.publishableKey = publishableKey;
 
   // await Firebase.initializeApp();
@@ -51,7 +54,7 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
-      home: BottomNav(),
+      home: Wallet(),
     );
   }
 }
@@ -75,6 +78,15 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
+  // Map<String, dynamic>? paymentIntent;
+
+  // void createPaymentIntent(){
+  //   try{
+
+  //   }catch(e){
+
+  //   }
+  // }
   int _counter = 0;
 
   void _incrementCounter() {
