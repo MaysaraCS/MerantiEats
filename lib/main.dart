@@ -16,9 +16,7 @@ import 'package:http/http.dart' as http;
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
-  Stripe.publishableKey =
-      "pk_test_51P9yW1GOPvn0rH0uIdmlzsT7d1quekUMCYs6qquL9FWzEwmpGCD8VGMevJwAMwUxMQQoaf2nT2MKTAD19dhzeD6q00vYILDWKC";
-  // Stripe.publishableKey = publishableKey;
+  Stripe.publishableKey = publishableKey;
 
   // await Firebase.initializeApp();
   await Firebase.initializeApp(
@@ -54,7 +52,7 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
-      home: Wallet(),
+      home: Onboard(),
     );
   }
 }

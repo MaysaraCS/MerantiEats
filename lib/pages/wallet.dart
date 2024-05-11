@@ -3,8 +3,6 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:flutter_stripe/flutter_stripe.dart';
 import 'package:food_delivery_app/widget/widget_support.dart';
-
-// import 'package:flutter_stripe/flutter_stripe.dart';
 import 'package:food_delivery_app/service/database.dart';
 import 'package:food_delivery_app/service/shared_pref.dart';
 import 'package:food_delivery_app/widget/app_constant.dart';
